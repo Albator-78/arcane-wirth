@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarot d'Oswald Wirth (1889) — Tirage Triadique &amp; Arcanes Majeurs</title>
+  <style>
+    :root {
+      --bg-deep: #0d0b10;
+      --bg-card: #16131c;
+      --bg-panel: #1d1825;
+      --gold: #d4af37;
+      --gold-soft: #e8cf7a;
+      --gold-dim: rgba(212, 175, 55, 0.25);
+      --parchment: #f3ece0;
+      --text-main: #efe9dc;
+      --text-muted: #a99fb5;
+      --accent-crimson: #9e2a2b;
+      --accent-teal: #2a6f78;
+      --radius: 14px;
+      --shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      background: radial-gradient(circle at top, #1f192b 0%, var(--bg-deep) 68%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      padding-bottom: 4rem;
+    }
+
+    header {
+      text-align: center;
+      padding: 2.6rem 1.2rem 1.8rem;
+      border-bottom: 1px solid var(--gold-dim);
+      background: linear-gradient(180deg, rgba(212,175,55,0.07) 0%, transparent 100%);
+    }
+
+    .badge-bnf {
+      display: inline-block;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      border: 1px solid var(--gold-dim);
+      padding: 0.28rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 3.6vw, 2.7rem);
+      font-weight: 400;
+      color: var(--gold-soft);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.45rem;
+    }
+
+    .subtitle {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .math-pill {
+      margin-top: 1rem;
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      align-items: center;
+      background: var(--bg-panel);
+      border: 1px solid var(--gold-dim);
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-main);
+    }
+
+    .math-pill strong { color: var(--gold-soft); }
+
+    nav.tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1.4rem 1rem 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--bg-panel);
+      color: var(--text-muted);
+      border: 1px solid var(--gold-dim);
+      padding: 0.65rem 1.35rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.9rem;
+      transition: all 0.22s ease;
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--gold);
+      color: #120f17;
+      font-weight: 600;
+      border-color: var(--gold);
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1.5rem 1.2rem;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; animation: fadeIn 0.35s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .controls-box {
+      background: var(--bg-panel);
+      border: 1px solid var(--gold-dim);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .question-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .question-row input {
+      flex: 1 1 280px;
+      background: var(--bg-deep);
+      border: 1px solid var(--gold-dim);
+      color: var(--text-main);
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.98rem;
+    }
+
+    .question-row input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .options-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .mode-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: center;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.85rem;
+    }
+
+    .mode-group label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--bg-deep);
+      border: 1px solid var(--gold-dim);
+      padding: 0.45rem 0.85rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .action-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #e5c358, #b88c1e);
+      color: #141019;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--gold-soft);
+      border: 1px solid var(--gold-dim);
+      padding: 0.72rem 1.15rem;
+      border-radius: 10px;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn-secondary:hover { background: rgba(212, 175, 55, 0.1); }
+
+    .spread-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .slot-card {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-dim);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .slot-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .slot-role {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .slot-subrole {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .card-stage {
+      width: 220px;
+      height: 372px;
+      perspective: 1100px;
+      margin-bottom: 1.1rem;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .card-stage.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid var(--gold);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.65);
+    }
+
+    .card-back {
+      background:
+        radial-gradient(circle at center, rgba(212,175,55,0.22) 0%, transparent 62%),
+        repeating-linear-gradient(45deg, #1b1526 0px, #1b1526 10px, #14101d 10px, #14101d 20px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+    }
+
+    .card-back-ornament {
+      width: 150px;
+      height: 270px;
+      border: 1px solid var(--gold-dim);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-soft);
+      gap: 0.6rem;
+    }
+
+    .card-back-ornament span { font-size: 2rem; }
+
+    .card-back-ornament small {
+      font-family: system-ui, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .card-front {
+      transform: rotateY(180deg);
+      background: var(--parchment);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .card-front.reversed img {
+      transform: rotate(180deg);
+    }
+
+    .papesse-plate {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #f5efe2 0%, #e6dcc8 100%);
+      color: #241d15;
+      border: 6px solid #2b241d;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem 0.85rem;
+      text-align: center;
+    }
+
+    .papesse-plate.reversed { transform: rotate(180deg); }
+    .papesse-plate .top-num { font-size: 1.15rem; font-weight: bold; letter-spacing: 0.1em; }
+    .papesse-plate .emblem { font-size: 3.2rem; color: #2a4d69; margin: 0.5rem 0; }
+    .papesse-plate .plate-note { font-size: 0.76rem; color: #5c4f3d; font-style: italic; }
+    .papesse-plate .cartouche {
+      background: #e9cf6b;
+      border: 1.5px solid #2b241d;
+      padding: 0.35rem 0.5rem;
+      font-weight: bold;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+    }
+
+    .card-meta { width: 100%; }
+
+    .card-title {
+      font-size: 1.25rem;
+      color: var(--gold-soft);
+      margin-bottom: 0.25rem;
+    }
+
+    .orientation-tag {
+      display: inline-block;
+      font-family: system-ui, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 0.65rem;
+    }
+
+    .orientation-tag.upright {
+      background: rgba(42, 111, 120, 0.28);
+      color: #8ce0eb;
+      border: 1px solid rgba(140, 224, 235, 0.35);
+    }
+
+    .orientation-tag.reversed {
+      background: rgba(158, 42, 43, 0.28);
+      color: #f4a3a4;
+      border: 1px solid rgba(244, 163, 164, 0.35);
+    }
+
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .kw {
+      font-family: system-ui, sans-serif;
+      font-size: 0.74rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(212,175,55,0.2);
+      padding: 0.18rem 0.55rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    .card-meaning {
+      font-size: 0.93rem;
+      color: var(--text-main);
+      text-align: left;
+      background: rgba(0, 0, 0, 0.24);
+      padding: 0.85rem;
+      border-radius: 10px;
+      border-left: 3px solid var(--gold);
+    }
+
+    .synthesis-box {
+      background: linear-gradient(145deg, #1c1626, #14101c);
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .synthesis-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      border-bottom: 1px solid var(--gold-dim);
+      padding-bottom: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .synthesis-header h2 {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--gold-soft);
+    }
+
+    .quintessence-badge {
+      font-family: system-ui, sans-serif;
+      font-size: 0.82rem;
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid var(--gold);
+      color: var(--gold-soft);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+    }
+
+    .synthesis-body p { margin-bottom: 0.85rem; font-size: 0.98rem; }
+    .synthesis-body p:last-child { margin-bottom: 0; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .gallery-item {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-dim);
+      border-radius: 12px;
+      padding: 0.8rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+    }
+
+    .gallery-thumb {
+      width: 100%;
+      aspect-ratio: 250 / 422;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 0.65rem;
+      border: 1px solid rgba(212,175,55,0.3);
+      background: var(--parchment);
+    }
+
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-item h3 {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--gold-soft);
+    }
+
+    .gallery-item span {
+      font-family: system-ui, sans-serif;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .combinatorics-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--gold-dim);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      box-shadow: var(--shadow);
+    }
+
+    .combinatorics-card h2 {
+      color: var(--gold-soft);
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .formula-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.2rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    .formula-table th, .formula-table td {
+      padding: 0.75rem 0.9rem;
+      border-bottom: 1px solid var(--gold-dim);
+      text-align: left;
+    }
+
+    .formula-table th {
+      color: var(--gold-soft);
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    .highlight-row td {
+      background: rgba(212, 175, 55, 0.14);
+      font-weight: 600;
+      color: var(--gold-soft);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 5, 9, 0.84);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal-dialog {
+      background: var(--bg-panel);
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      max-width: 680px;
+      width: 100%;
+      padding: 1.6rem;
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 1.4rem;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    }
+
+    @media (max-width: 620px) {
+      .modal-dialog { grid-template-columns: 1fr; text-align: center; }
+      .modal-dialog img { max-width: 190px; margin: 0 auto; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 0.8rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--gold-soft);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .modal-img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+    }
+
+    .modal-info h3 {
+      font-size: 1.45rem;
+      color: var(--gold-soft);
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-info .hebrew {
+      font-family: system-ui, sans-serif;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .modal-info p {
+      font-size: 0.94rem;
+      margin-bottom: 0.75rem;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="badge-bnf">Jeu d'Oswald Wirth &bull; Paris 1889 &bull; Collection BnF</div>
+    <h1>Tarot Symbolique — Tirage à Trois Lames</h1>
+    <p class="subtitle">
+      Exploration des 22 Arcanes Majeurs dessinés par Oswald Wirth en 1889 : tirage triadique interactif,
+      calcul de quintessence et analyse combinatoire.
+    </p>
+    <div class="math-pill" id="comboCounter">
+      <span>22 &times; 21 &times; 20 = <strong>9 240</strong> arrangements ordonnés (à l'endroit)</span>
+      <span>&bull;</span>
+      <span>avec renversements (&times; 2&sup3;) = <strong>73 920</strong> tirages</span>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Navigation principale">
+    <button class="tab-btn active" data-tab="tirage">Tirage à 3 Cartes</button>
+    <button class="tab-btn" data-tab="galerie">Les 22 Arcanes (Wirth 1889)</button>
+    <button class="tab-btn" data-tab="combinatoire">Combinatoire &amp; 9 240</button>
+  </nav>
+
+  <main>
+    <section id="tab-tirage" class="section active">
+      <div class="controls-box">
+        <div class="question-row">
+          <input
+            type="text"
+            id="questionInput"
+            placeholder="Formulez votre question ou votre intention avant de battre les lames (facultatif)..."
+          />
+        </div>
+        <div class="options-row">
+          <div class="mode-group">
+            <label>
+              <input type="radio" name="axeMode" value="temps" checked />
+              Passé &bull; Présent &bull; Avenir
+            </label>
+            <label>
+              <input type="radio" name="axeMode" value="dialectique" />
+              Pour &bull; Contre &bull; Synthèse
+            </label>
+            <label>
+              <input type="checkbox" id="allowReversed" checked />
+              Inclure les lames renversées (73 920 cas)
+            </label>
+          </div>
+          <div class="action-btns">
+            <button class="btn-secondary" id="btnRevealAll" type="button">Retourner les 3 lames</button>
+            <button class="btn-primary" id="btnDraw" type="button">Battre &amp; Tirer 3 Lames</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="spread-grid" id="spreadGrid"></div>
+
+      <div class="synthesis-box" id="synthesisBox">
+        <div class="synthesis-header">
+          <h2>Lecture Triadique &amp; Synthèse</h2>
+          <span class="quintessence-badge" id="quintessenceBadge">Quintessence : —</span>
+        </div>
+        <div class="synthesis-body" id="synthesisBody"></div>
+      </div>
+    </section>
+
+    <section id="tab-galerie" class="section">
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <section id="tab-combinatoire" class="section">
+      <div class="combinatorics-card">
+        <h2>Pourquoi 9 240 possibilités pour un tirage de 3 cartes ?</h2>
+        <p>
+          Le jeu des Arcanes Majeurs compte exactement <strong>22 lames</strong> (numérotées de I à XXI, plus Le Fou sans nombre ou 0).
+          Lorsqu'on tire 3 cartes successivement sans remise dans un ordre précis (par exemple <em>Passé &rarr; Présent &rarr; Avenir</em>),
+          il s'agit d'un <strong>arrangement sans répétition</strong> de 3 éléments parmi 22 :
+        </p>
+        <table class="formula-table">
+          <thead>
+            <tr>
+              <th>Type de tirage (3 cartes parmi 22)</th>
+              <th>Formule</th>
+              <th>Nombre exact de cas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td>3 lames ordonnées à l'endroit (Poste 1, Poste 2, Poste 3)</td>
+              <td>22 &times; 21 &times; 20 = A(22, 3)</td>
+              <td>9 240 possibilités</td>
+            </tr>
+            <tr>
+              <td>3 lames ordonnées avec sens endroit / renversé</td>
+              <td>9 240 &times; 2&sup3; (9 240 &times; 8)</td>
+              <td>73 920 possibilités</td>
+            </tr>
+            <tr>
+              <td>Poignée de 3 lames sans ordre (combinaison simple)</td>
+              <td>C(22, 3) = 9 240 / 3!</td>
+              <td>1 540 combinaisons</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Note sur l'archive <code>am.zip</code> : 21 planches originales de la BnF (1889) sont présentes dans le dossier <code>wirth/</code>
+          (<code>00</code> à <code>01</code> et <code>03</code> à <code>21</code>). La lame <strong>II — La Papesse</strong> (absente du ZIP) est intégrée
+          au moteur des 22 arcanes avec une planche typographique fidèle à l'édition Wirth afin de préserver l'intégralité des 9 240 arrangements.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="arcaneModal" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <button class="modal-close" id="modalClose" aria-label="Fermer">&times;</button>
+      <div id="modalVisual"></div>
+      <div class="modal-info" id="modalInfo"></div>
+    </div>
+  </div>
+
+  <script>
+    const ARCANES = [
+  {
+    "num": 0,
+    "romain": "0",
+    "nom": "Le Fou",
+    "lettre": "ש (Shin)",
+    "img": "wirth/00.jpg",
+    "mots": [
+      "Élan libre",
+      "Inattendu",
+      "Quête",
+      "Détachement"
+    ],
+    "endroit": "Marche vers l'inconnu avec légèreté et foi instinctive. Une ouverture radicale se présente, affranchie des cadres établis.",
+    "renverse": "Errance sans boussole, fuite devant les responsabilités ou dispersion des forces par manque d'ancrage."
+  },
+  {
+    "num": 1,
+    "romain": "I",
+    "nom": "Le Bateleur",
+    "lettre": "א (Aleph)",
+    "img": "wirth/01.jpg",
+    "mots": [
+      "Initiative",
+      "Habileté",
+      "Potentiel",
+      "Commencement"
+    ],
+    "endroit": "Tous les outils sont réunis sur la table : l'idée peut prendre corps par l'adresse, l'audace et la maîtrise naissante.",
+    "renverse": "Dispersions, hésitations au seuil de l'action ou ruse employée à contretemps."
+  },
+  {
+    "num": 2,
+    "romain": "II",
+    "nom": "La Papesse",
+    "lettre": "ב (Beth)",
+    "img": null,
+    "mots": [
+      "Savoir intérieur",
+      "Silence",
+      "Intuition",
+      "Gestation"
+    ],
+    "endroit": "Recueillement fécond, écoute des lois cachées et maturation silencieuse avant toute révélation.",
+    "renverse": "Secret pesant, repli stérile ou refus de voir une vérité déjà inscrite entre les lignes."
+  },
+  {
+    "num": 3,
+    "romain": "III",
+    "nom": "L'Impératrice",
+    "lettre": "ג (Guimel)",
+    "img": "wirth/03.jpg",
+    "mots": [
+      "Créativité",
+      "Verbe",
+      "Fertilité",
+      "Intelligence"
+    ],
+    "endroit": "Épanouissement des idées, rayonnement de l'esprit et capacité à donner forme vivante aux projets.",
+    "renverse": "Stérilité créative, vanité intellectuelle ou agitation qui peine à se concrétiser."
+  },
+  {
+    "num": 4,
+    "romain": "IV",
+    "nom": "L'Empereur",
+    "lettre": "ד (Daleth)",
+    "img": "wirth/04.jpg",
+    "mots": [
+      "Structure",
+      "Autorité",
+      "Stabilité",
+      "Réalisation"
+    ],
+    "endroit": "Assise solide, volonté ordonnatrice et capacité à bâtir dans la durée avec droiture et maîtrise.",
+    "renverse": "Rigidité excessive, entêtement autoritaire ou fragilité d'une fondation trop rigide."
+  },
+  {
+    "num": 5,
+    "romain": "V",
+    "nom": "Le Pape",
+    "lettre": "ה (Hé)",
+    "img": "wirth/05.jpg",
+    "mots": [
+      "Transmission",
+      "Conseil",
+      "Alliance",
+      "Sagesse"
+    ],
+    "endroit": "Lien entre l'idéal et la pratique, enseignement éclairé, médiation juste et fidélité à une parole donnée.",
+    "renverse": "Dogmatisme, conseil biaisé ou attachement formaliste à la lettre au détriment de l'esprit."
+  },
+  {
+    "num": 6,
+    "romain": "VI",
+    "nom": "L'Amoureux",
+    "lettre": "ו (Vav)",
+    "img": "wirth/06.jpg",
+    "mots": [
+      "Choix",
+      "Élan du cœur",
+      "Engagement",
+      "Carrefour"
+    ],
+    "endroit": "Décision libre et engagée au croisement des voies ; accord profond entre le désir et la conscience.",
+    "renverse": "Indécision prolongée, tiraillement intérieur ou choix subi par peur de renoncer."
+  },
+  {
+    "num": 7,
+    "romain": "VII",
+    "nom": "Le Chariot",
+    "lettre": "ז (Zaïn)",
+    "img": "wirth/07.jpg",
+    "mots": [
+      "Conquête",
+      "Direction",
+      "Élan maîtrisé",
+      "Triomphe"
+    ],
+    "endroit": "Progression résolue en harmonisant des forces contraires ; avancée victorieuse vers un cap clair.",
+    "renverse": "Emballement, perte de maîtrise des rênes ou victoire coûteuse faute de discernement."
+  },
+  {
+    "num": 8,
+    "romain": "VIII",
+    "nom": "La Justice",
+    "lettre": "ח (Heth)",
+    "img": "wirth/08.jpg",
+    "mots": [
+      "Équilibre",
+      "Rigueur",
+      "Clarté",
+      "Juste mesure"
+    ],
+    "endroit": "Pesée lucide des actes et des conséquences ; décision équitable, tranchante et impartiale.",
+    "renverse": "Déséquilibre, jugement partial ou sévérité qui oublie l'équité profonde."
+  },
+  {
+    "num": 9,
+    "romain": "IX",
+    "nom": "L'Ermite",
+    "lettre": "ט (Teth)",
+    "img": "wirth/09.jpg",
+    "mots": [
+      "Prudence",
+      "Recherche",
+      "Lumière intérieure",
+      "Temps long"
+    ],
+    "endroit": "Cheminement patient éclairé par l'expérience ; retrait salutaire pour discerner l'essentiel.",
+    "renverse": "Isolement subi, lenteur excessive ou refus de partager sa lampe avec autrui."
+  },
+  {
+    "num": 10,
+    "romain": "X",
+    "nom": "La Roue de Fortune",
+    "lettre": "י (Yod)",
+    "img": "wirth/10.jpg",
+    "mots": [
+      "Cycle",
+      "Mouvement",
+      "Opportunité",
+      "Tournant"
+    ],
+    "endroit": "Basculement d'un cycle, ouverture soudaine et invitation à saisir l'instant au point d'équilibre.",
+    "renverse": "Instabilité répétitive, contretemps ou résistance au changement nécessaire."
+  },
+  {
+    "num": 11,
+    "romain": "XI",
+    "nom": "La Force",
+    "lettre": "כ (Kaph)",
+    "img": "wirth/11.jpg",
+    "mots": [
+      "Maîtrise douce",
+      "Courage",
+      "Endurance",
+      "Sublimation"
+    ],
+    "endroit": "Domination calme de l'instinct sans violence ; puissance tranquille qui apprivoise l'obstacle.",
+    "renverse": "Impatience, emportement ou doute quant à sa propre capacité de résistance."
+  },
+  {
+    "num": 12,
+    "romain": "XII",
+    "nom": "Le Pendu",
+    "lettre": "ל (Lamed)",
+    "img": "wirth/12.jpg",
+    "mots": [
+      "Renversement",
+      "Lâcher-prise",
+      "Contemplation",
+      "Suspension"
+    ],
+    "endroit": "Arrêt fécond qui invite à regarder le monde autrement ; détachement volontaire libérant un nouveau regard.",
+    "renverse": "Blocage stérile, attente subie ou sacrifice inutile faute de trancher."
+  },
+  {
+    "num": 13,
+    "romain": "XIII",
+    "nom": "La Mort",
+    "lettre": "מ (Mem)",
+    "img": "wirth/13.jpg",
+    "mots": [
+      "Mutation",
+      "Élagage",
+      "Fin de cycle",
+      "Renouveau"
+    ],
+    "endroit": "Transformation profonde et nécessaire : ce qui a achevé son temps cède la place à une terre neuve.",
+    "renverse": "Résistance douloureuse à l'inévitable, attachement au passé ou mue inachevée."
+  },
+  {
+    "num": 14,
+    "romain": "XIV",
+    "nom": "La Tempérance",
+    "lettre": "נ (Noun)",
+    "img": "wirth/14.jpg",
+    "mots": [
+      "Alchimie",
+      "Fluidité",
+      "Conciliation",
+      "Guérison"
+    ],
+    "endroit": "Circulation harmonieuse entre deux pôles ; apaisement, adaptation souple et régénération.",
+    "renverse": "Discordance, excès ou difficulté à trouver le juste dosage entre deux exigences."
+  },
+  {
+    "num": 15,
+    "romain": "XV",
+    "nom": "Le Diable",
+    "lettre": "ס (Samekh)",
+    "img": "wirth/15.jpg",
+    "mots": [
+      "Désir",
+      "Magnétisme",
+      "Attachement",
+      "Lucidité"
+    ],
+    "endroit": "Énergie vitale brute et lucide sur les passions ; capacité à reconnaître ce qui lie pour s'en affranchir.",
+    "renverse": "Emprise, dépendance, fascination aveugle ou jeu de pouvoir destructeur."
+  },
+  {
+    "num": 16,
+    "romain": "XVI",
+    "nom": "Le Feu du Ciel",
+    "lettre": "ע (Ayin)",
+    "img": "wirth/16.jpg",
+    "mots": [
+      "Éclair",
+      "Rupture",
+      "Révélation",
+      "Éveil brutal"
+    ],
+    "endroit": "Effondrement salutaire d'une construction trop orgueilleuse ; illumination soudaine qui libère l'horizon.",
+    "renverse": "Secousse redoutée, crise contenue ou reconstruction retardée par déni."
+  },
+  {
+    "num": 17,
+    "romain": "XVII",
+    "nom": "Les Étoiles",
+    "lettre": "פ (Phé)",
+    "img": "wirth/17.jpg",
+    "mots": [
+      "Espérance",
+      "Inspiration",
+      "Pureté",
+      "Guidance"
+    ],
+    "endroit": "Sérénité retrouvée sous une lumière bienveillante ; confiance créatrice et don généreux de soi.",
+    "renverse": "Désenchantement passager, doute sur sa bonne étoile ou dispersion rêveuse."
+  },
+  {
+    "num": 18,
+    "romain": "XVIII",
+    "nom": "La Lune",
+    "lettre": "צ (Tsadé)",
+    "img": "wirth/18.jpg",
+    "mots": [
+      "Profondeurs",
+      "Imaginaire",
+      "Reflets",
+      "Mystère"
+    ],
+    "endroit": "Exploration féconde de l'inconscient, des rêves et de la mémoire ; sensibilité accrue aux signes subtils.",
+    "renverse": "Illusions, confusion émotionnelle, craintes nocturnes ou mirages trompeurs."
+  },
+  {
+    "num": 19,
+    "romain": "XIX",
+    "nom": "Le Soleil",
+    "lettre": "ק (Qoph)",
+    "img": "wirth/19.jpg",
+    "mots": [
+      "Clarté",
+      "Joie",
+      "Fraternité",
+      "Rayonnement"
+    ],
+    "endroit": "Lumière pleine et chaleureuse ; réussite partagée, compréhension limpide et vitalité rayonnante.",
+    "renverse": "Éblouissement, chaleur excessive ou joie différée par un léger voile."
+  },
+  {
+    "num": 20,
+    "romain": "XX",
+    "nom": "Le Jugement",
+    "lettre": "ר (Resh)",
+    "img": "wirth/20.jpg",
+    "mots": [
+      "Appel",
+      "Réveil",
+      "Libération",
+      "Renouveau"
+    ],
+    "endroit": "Éveil décisif à une vocation ou à une vérité neuve ; libération soudaine et bilan lumineux.",
+    "renverse": "Surdité à l'appel intérieur, hésitation à franchir le seuil ou nostalgie paralysante."
+  },
+  {
+    "num": 21,
+    "romain": "XXI",
+    "nom": "Le Monde",
+    "lettre": "ת (Tav)",
+    "img": "wirth/21.jpg",
+    "mots": [
+      "Accomplissement",
+      "Plénitude",
+      "Unité",
+      "Couronnement"
+    ],
+    "endroit": "Achèvement harmonieux d'un grand cycle ; accord total entre l'être intérieur et le monde extérieur.",
+    "renverse": "Inachèvement, ultime obstacle avant la couronne ou difficulté à clore un chapitre."
+  }
+];
+
+    const AXES = {
+      temps: [
+        { titre: "I. Le Passé", sousTitre: "Racines & forces en présence" },
+        { titre: "II. Le Présent", sousTitre: "Nœud de la situation" },
+        { titre: "III. L'Avenir", sousTitre: "Direction & aboutissement" }
+      ],
+      dialectique: [
+        { titre: "I. Ce qui soutient", sousTitre: "Forces favorables (Thèse)" },
+        { titre: "II. Ce qui résiste", sousTitre: "Obstacle ou défi (Antithèse)" },
+        { titre: "III. La Synthèse", sousTitre: "Voie de résolution" }
+      ]
+    };
+
+    function deArcane(nom) {
+      if (nom.startsWith("Le ")) return "du " + nom.slice(3);
+      if (nom.startsWith("Les ")) return "des " + nom.slice(4);
+      if (nom.startsWith("L'")) return "de l'" + nom.slice(2);
+      return "de " + nom;
+    }
+
+    function tirerTroisArcanes(avecRenversement) {
+      const deck = ARCANES.map((_, idx) => idx);
+      for (let i = deck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deck[i], deck[j]] = [deck[j], deck[i]];
+      }
+      return deck.slice(0, 3).map(idx => {
+        const arcane = ARCANES[idx];
+        const renverse = avecRenversement ? Math.random() < 0.5 : false;
+        return { arcane, renverse };
+      });
+    }
+
+    function calculerQuintessence(tirage) {
+      let somme = tirage.reduce((acc, item) => acc + (item.arcane.num === 0 ? 22 : item.arcane.num), 0);
+      while (somme > 22) {
+        somme = String(somme).split("").reduce((a, b) => a + Number(b), 0);
+      }
+      const cible = somme === 22 ? 0 : somme;
+      return ARCANES.find(a => a.num === cible) || ARCANES[0];
+    }
+
+    function renderCardGraphic(arcane, renverse) {
+      if (arcane.img) {
+        return `<img src="${arcane.img}" alt="${arcane.romain} — ${arcane.nom}" loading="lazy" />`;
+      }
+      return `
+        <div class="papesse-plate ${renverse ? 'reversed' : ''}">
+          <div class="top-num">${arcane.romain} &bull; ${arcane.lettre.split(' ')[0]}</div>
+          <div class="emblem">&#9789;&#9790;</div>
+          <div class="plate-note">Planche manquante dans l'archive BnF<br/>(Reconstitution typographique Wirth 1889)</div>
+          <div class="cartouche">${arcane.nom.toUpperCase()}</div>
+        </div>
+      `;
+    }
+
+    let tirageActuel = [];
+
+    function afficherTirage(autoFlip = false) {
+      const axeKey = document.querySelector('input[name="axeMode"]:checked').value;
+      const avecRenversement = document.getElementById("allowReversed").checked;
+      const postes = AXES[axeKey];
+      tirageActuel = tirerTroisArcanes(avecRenversement);
+
+      const grid = document.getElementById("spreadGrid");
+      grid.innerHTML = "";
+
+      tirageActuel.forEach((item, index) => {
+        const { arcane, renverse } = item;
+        const poste = postes[index];
+        const cardEl = document.createElement("article");
+        cardEl.className = "slot-card";
+        cardEl.innerHTML = `
+          <div class="slot-role">${poste.titre}</div>
+          <div class="slot-subrole">${poste.sousTitre}</div>
+          <div class="card-stage ${autoFlip ? 'flipped' : ''}" data-index="${index}" title="Cliquer pour retourner la lame">
+            <div class="card-inner">
+              <div class="card-face card-back">
+                <div class="card-back-ornament">
+                  <span>&#10022;</span>
+                  <strong>OSWALD WIRTH</strong>
+                  <small>Cliquer pour révéler</small>
+                </div>
+              </div>
+              <div class="card-face card-front ${renverse ? 'reversed' : ''}">
+                ${renderCardGraphic(arcane, renverse)}
+              </div>
+            </div>
+          </div>
+          <div class="card-meta" style="visibility: ${autoFlip ? 'visible' : 'hidden'};" id="meta-${index}">
+            <h3 class="card-title">${arcane.romain} — ${arcane.nom}</h3>
+            <span class="orientation-tag ${renverse ? 'reversed' : 'upright'}">
+              ${renverse ? 'Lame renversée' : 'Lame à l’endroit'} &bull; ${arcane.lettre}
+            </span>
+            <div class="keywords">
+              ${arcane.mots.map(m => `<span class="kw">${m}</span>`).join("")}
+            </div>
+            <p class="card-meaning">${renverse ? arcane.renverse : arcane.endroit}</p>
+          </div>
+        `;
+        grid.appendChild(cardEl);
+
+        const stage = cardEl.querySelector(".card-stage");
+        stage.addEventListener("click", () => {
+          stage.classList.add("flipped");
+          document.getElementById(`meta-${index}`).style.visibility = "visible";
+          verifierToutRevele();
+        });
+      });
+
+      if (autoFlip) {
+        genererSynthese();
+      } else {
+        document.getElementById("quintessenceBadge").textContent = "Quintessence : retournez les 3 lames";
+        document.getElementById("synthesisBody").innerHTML =
+          "<p style='color:var(--text-muted)'>Cliquez sur chacune des trois lames (ou sur « Retourner les 3 lames ») pour dévoiler la lecture complète et l'arcane de quintessence.</p>";
+      }
+    }
+
+    function verifierToutRevele() {
+      const stages = document.querySelectorAll(".card-stage");
+      const allFlipped = Array.from(stages).every(s => s.classList.contains("flipped"));
+      if (allFlipped) genererSynthese();
+    }
+
+    function genererSynthese() {
+      if (tirageActuel.length < 3) return;
+      const axeKey = document.querySelector('input[name="axeMode"]:checked').value;
+      const question = document.getElementById("questionInput").value.trim();
+      const [c1, c2, c3] = tirageActuel;
+      const quint = calculerQuintessence(tirageActuel);
+
+      document.getElementById("quintessenceBadge").textContent =
+        `Quintessence : ${quint.romain} — ${quint.nom}`;
+
+      const introQuestion = question
+        ? `<p><strong>Question posée :</strong> « ${question.replace(/</g, "&lt;")} »</p>`
+        : "";
+
+      let articulation = "";
+      if (axeKey === "temps") {
+        articulation = `
+          <p>
+            Le mouvement s'enracine dans l'énergie ${deArcane(c1.arcane.nom)} (${c1.renverse ? "en défi ou intériorisée" : "pleinement active"}),
+            traverse au présent l'épreuve ou la dynamique ${deArcane(c2.arcane.nom)} (${c2.arcane.mots[0].toLowerCase()}),
+            et s'oriente vers l'horizon ${deArcane(c3.arcane.nom)} (${c3.renverse ? "qui demande un ajustement conscient" : "porteur de " + c3.arcane.mots[0].toLowerCase()}).
+          </p>
+        `;
+      } else {
+        articulation = `
+          <p>
+            L'appui principal provient ${deArcane(c1.arcane.nom)} (${c1.arcane.mots[0].toLowerCase()}),
+            tandis que la tension ou l'obstacle se cristallise autour ${deArcane(c2.arcane.nom)}.
+            La voie de dépassement s'ouvre en répondant à l'appel ${deArcane(c3.arcane.nom)}.
+          </p>
+        `;
+      }
+
+      const conseilQuint = `
+        <p>
+          <strong>Synthèse secrète (${quint.romain} — ${quint.nom}) :</strong>
+          En arrière-plan du tirage veille la leçon ${deArcane(quint.nom)} : <em>${quint.endroit}</em>
+        </p>
+      `;
+
+      document.getElementById("synthesisBody").innerHTML = introQuestion + articulation + conseilQuint;
+    }
+
+    function construireGalerie() {
+      const grid = document.getElementById("galleryGrid");
+      grid.innerHTML = ARCANES.map(a => `
+        <div class="gallery-item" data-num="${a.num}">
+          <div class="gallery-thumb">
+            ${renderCardGraphic(a, false)}
+          </div>
+          <h3>${a.romain} — ${a.nom}</h3>
+          <span>${a.lettre}</span>
+        </div>
+      `).join("");
+
+      grid.querySelectorAll(".gallery-item").forEach(el => {
+        el.addEventListener("click", () => {
+          const num = Number(el.dataset.num);
+          const a = ARCANES.find(item => item.num === num);
+          ouvrirModal(a);
+        });
+      });
+    }
+
+    function ouvrirModal(a) {
+      document.getElementById("modalVisual").innerHTML = a.img
+        ? `<img class="modal-img" src="${a.img}" alt="${a.nom}" />`
+        : `<div style="height:340px">${renderCardGraphic(a, false)}</div>`;
+
+      document.getElementById("modalInfo").innerHTML = `
+        <h3>${a.romain} — ${a.nom}</h3>
+        <div class="hebrew">Lettre hébraïque : ${a.lettre} &bull; Mots-clés : ${a.mots.join(", ")}</div>
+        <p><strong>À l'endroit :</strong> ${a.endroit}</p>
+        <p><strong>Renversée :</strong> ${a.renverse}</p>
+      `;
+      document.getElementById("arcaneModal").classList.add("open");
+    }
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+      });
+    });
+
+    document.getElementById("btnDraw").addEventListener("click", () => afficherTirage(false));
+    document.getElementById("btnRevealAll").addEventListener("click", () => {
+      document.querySelectorAll(".card-stage").forEach((s, idx) => {
+        s.classList.add("flipped");
+        const meta = document.getElementById(`meta-${idx}`);
+        if (meta) meta.style.visibility = "visible";
+      });
+      genererSynthese();
+    });
+
+    document.getElementById("allowReversed").addEventListener("change", (e) => {
+      const counter = document.getElementById("comboCounter");
+      if (e.target.checked) {
+        counter.innerHTML = `
+          <span>22 &times; 21 &times; 20 = <strong>9 240</strong> arrangements ordonnés</span>
+          <span>&bull;</span>
+          <span>avec renversements (&times; 2&sup3;) = <strong>73 920</strong> tirages actifs</span>
+        `;
+      } else {
+        counter.innerHTML = `
+          <span>Mode lames à l'endroit uniquement : 22 &times; 21 &times; 20 = <strong>9 240</strong> tirages actifs</span>
+        `;
+      }
+      afficherTirage(false);
+    });
+
+    const modal = document.getElementById("arcaneModal");
+    document.getElementById("modalClose").addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.remove("open");
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") modal.classList.remove("open");
+    });
+
+    construireGalerie();
+    afficherTirage(false);
+  </script>
+</body>
+</html>
