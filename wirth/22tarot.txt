@@ -2,7 +2,7 @@ wirth/00-le-fou-oswald-wirth-tarot-deck-1889-bnf-4ca673.jpg
 
 wirth/01_Le_Bateleur,_Oswald_Wirth_Tarot_Deck_1889_BnF
 
-02_La_Papesse,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg
+wirth/02_La_Papesse,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg
 
 wirth/03_L'Imperatrice,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg
 
