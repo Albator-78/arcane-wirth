@@ -736,7 +736,7 @@
           </tbody>
         </table>
         <p style="color: var(--text-muted); font-size: 0.92rem;">
-          Note sur l'archive <code>am.zip</code> : 21 planches originales de la BnF (1889) sont présentes dans le dossier <code>wirth/</code>
+          Note sur l'archive <code>am_2.zip</code> : 21 planches originales de la BnF (1889) sont présentes dans le dossier <code>wirth/</code>
           (<code>00</code> à <code>01</code> et <code>03</code> à <code>21</code>). La lame <strong>II — La Papesse</strong> (absente du ZIP) est intégrée
           au moteur des 22 arcanes avec une planche typographique fidèle à l'édition Wirth afin de préserver l'intégralité des 9 240 arrangements.
         </p>
@@ -754,337 +754,337 @@
 
   <script>
     const ARCANES = [
-  {
-    "num": 0,
-    "romain": "0",
-    "nom": "Le Fou",
-    "lettre": "ש (Shin)",
-    "img": "wirth/00.jpg",
-    "mots": [
-      "Élan libre",
-      "Inattendu",
-      "Quête",
-      "Détachement"
-    ],
-    "endroit": "Marche vers l'inconnu avec légèreté et foi instinctive. Une ouverture radicale se présente, affranchie des cadres établis.",
-    "renverse": "Errance sans boussole, fuite devant les responsabilités ou dispersion des forces par manque d'ancrage."
-  },
-  {
-    "num": 1,
-    "romain": "I",
-    "nom": "Le Bateleur",
-    "lettre": "א (Aleph)",
-    "img": "wirth/01.jpg",
-    "mots": [
-      "Initiative",
-      "Habileté",
-      "Potentiel",
-      "Commencement"
-    ],
-    "endroit": "Tous les outils sont réunis sur la table : l'idée peut prendre corps par l'adresse, l'audace et la maîtrise naissante.",
-    "renverse": "Dispersions, hésitations au seuil de l'action ou ruse employée à contretemps."
-  },
-  {
-    "num": 2,
-    "romain": "II",
-    "nom": "La Papesse",
-    "lettre": "ב (Beth)",
-    "img": null,
-    "mots": [
-      "Savoir intérieur",
-      "Silence",
-      "Intuition",
-      "Gestation"
-    ],
-    "endroit": "Recueillement fécond, écoute des lois cachées et maturation silencieuse avant toute révélation.",
-    "renverse": "Secret pesant, repli stérile ou refus de voir une vérité déjà inscrite entre les lignes."
-  },
-  {
-    "num": 3,
-    "romain": "III",
-    "nom": "L'Impératrice",
-    "lettre": "ג (Guimel)",
-    "img": "wirth/03.jpg",
-    "mots": [
-      "Créativité",
-      "Verbe",
-      "Fertilité",
-      "Intelligence"
-    ],
-    "endroit": "Épanouissement des idées, rayonnement de l'esprit et capacité à donner forme vivante aux projets.",
-    "renverse": "Stérilité créative, vanité intellectuelle ou agitation qui peine à se concrétiser."
-  },
-  {
-    "num": 4,
-    "romain": "IV",
-    "nom": "L'Empereur",
-    "lettre": "ד (Daleth)",
-    "img": "wirth/04.jpg",
-    "mots": [
-      "Structure",
-      "Autorité",
-      "Stabilité",
-      "Réalisation"
-    ],
-    "endroit": "Assise solide, volonté ordonnatrice et capacité à bâtir dans la durée avec droiture et maîtrise.",
-    "renverse": "Rigidité excessive, entêtement autoritaire ou fragilité d'une fondation trop rigide."
-  },
-  {
-    "num": 5,
-    "romain": "V",
-    "nom": "Le Pape",
-    "lettre": "ה (Hé)",
-    "img": "wirth/05.jpg",
-    "mots": [
-      "Transmission",
-      "Conseil",
-      "Alliance",
-      "Sagesse"
-    ],
-    "endroit": "Lien entre l'idéal et la pratique, enseignement éclairé, médiation juste et fidélité à une parole donnée.",
-    "renverse": "Dogmatisme, conseil biaisé ou attachement formaliste à la lettre au détriment de l'esprit."
-  },
-  {
-    "num": 6,
-    "romain": "VI",
-    "nom": "L'Amoureux",
-    "lettre": "ו (Vav)",
-    "img": "wirth/06.jpg",
-    "mots": [
-      "Choix",
-      "Élan du cœur",
-      "Engagement",
-      "Carrefour"
-    ],
-    "endroit": "Décision libre et engagée au croisement des voies ; accord profond entre le désir et la conscience.",
-    "renverse": "Indécision prolongée, tiraillement intérieur ou choix subi par peur de renoncer."
-  },
-  {
-    "num": 7,
-    "romain": "VII",
-    "nom": "Le Chariot",
-    "lettre": "ז (Zaïn)",
-    "img": "wirth/07.jpg",
-    "mots": [
-      "Conquête",
-      "Direction",
-      "Élan maîtrisé",
-      "Triomphe"
-    ],
-    "endroit": "Progression résolue en harmonisant des forces contraires ; avancée victorieuse vers un cap clair.",
-    "renverse": "Emballement, perte de maîtrise des rênes ou victoire coûteuse faute de discernement."
-  },
-  {
-    "num": 8,
-    "romain": "VIII",
-    "nom": "La Justice",
-    "lettre": "ח (Heth)",
-    "img": "wirth/08.jpg",
-    "mots": [
-      "Équilibre",
-      "Rigueur",
-      "Clarté",
-      "Juste mesure"
-    ],
-    "endroit": "Pesée lucide des actes et des conséquences ; décision équitable, tranchante et impartiale.",
-    "renverse": "Déséquilibre, jugement partial ou sévérité qui oublie l'équité profonde."
-  },
-  {
-    "num": 9,
-    "romain": "IX",
-    "nom": "L'Ermite",
-    "lettre": "ט (Teth)",
-    "img": "wirth/09.jpg",
-    "mots": [
-      "Prudence",
-      "Recherche",
-      "Lumière intérieure",
-      "Temps long"
-    ],
-    "endroit": "Cheminement patient éclairé par l'expérience ; retrait salutaire pour discerner l'essentiel.",
-    "renverse": "Isolement subi, lenteur excessive ou refus de partager sa lampe avec autrui."
-  },
-  {
-    "num": 10,
-    "romain": "X",
-    "nom": "La Roue de Fortune",
-    "lettre": "י (Yod)",
-    "img": "wirth/10.jpg",
-    "mots": [
-      "Cycle",
-      "Mouvement",
-      "Opportunité",
-      "Tournant"
-    ],
-    "endroit": "Basculement d'un cycle, ouverture soudaine et invitation à saisir l'instant au point d'équilibre.",
-    "renverse": "Instabilité répétitive, contretemps ou résistance au changement nécessaire."
-  },
-  {
-    "num": 11,
-    "romain": "XI",
-    "nom": "La Force",
-    "lettre": "כ (Kaph)",
-    "img": "wirth/11.jpg",
-    "mots": [
-      "Maîtrise douce",
-      "Courage",
-      "Endurance",
-      "Sublimation"
-    ],
-    "endroit": "Domination calme de l'instinct sans violence ; puissance tranquille qui apprivoise l'obstacle.",
-    "renverse": "Impatience, emportement ou doute quant à sa propre capacité de résistance."
-  },
-  {
-    "num": 12,
-    "romain": "XII",
-    "nom": "Le Pendu",
-    "lettre": "ל (Lamed)",
-    "img": "wirth/12.jpg",
-    "mots": [
-      "Renversement",
-      "Lâcher-prise",
-      "Contemplation",
-      "Suspension"
-    ],
-    "endroit": "Arrêt fécond qui invite à regarder le monde autrement ; détachement volontaire libérant un nouveau regard.",
-    "renverse": "Blocage stérile, attente subie ou sacrifice inutile faute de trancher."
-  },
-  {
-    "num": 13,
-    "romain": "XIII",
-    "nom": "La Mort",
-    "lettre": "מ (Mem)",
-    "img": "wirth/13.jpg",
-    "mots": [
-      "Mutation",
-      "Élagage",
-      "Fin de cycle",
-      "Renouveau"
-    ],
-    "endroit": "Transformation profonde et nécessaire : ce qui a achevé son temps cède la place à une terre neuve.",
-    "renverse": "Résistance douloureuse à l'inévitable, attachement au passé ou mue inachevée."
-  },
-  {
-    "num": 14,
-    "romain": "XIV",
-    "nom": "La Tempérance",
-    "lettre": "נ (Noun)",
-    "img": "wirth/14.jpg",
-    "mots": [
-      "Alchimie",
-      "Fluidité",
-      "Conciliation",
-      "Guérison"
-    ],
-    "endroit": "Circulation harmonieuse entre deux pôles ; apaisement, adaptation souple et régénération.",
-    "renverse": "Discordance, excès ou difficulté à trouver le juste dosage entre deux exigences."
-  },
-  {
-    "num": 15,
-    "romain": "XV",
-    "nom": "Le Diable",
-    "lettre": "ס (Samekh)",
-    "img": "wirth/15.jpg",
-    "mots": [
-      "Désir",
-      "Magnétisme",
-      "Attachement",
-      "Lucidité"
-    ],
-    "endroit": "Énergie vitale brute et lucide sur les passions ; capacité à reconnaître ce qui lie pour s'en affranchir.",
-    "renverse": "Emprise, dépendance, fascination aveugle ou jeu de pouvoir destructeur."
-  },
-  {
-    "num": 16,
-    "romain": "XVI",
-    "nom": "Le Feu du Ciel",
-    "lettre": "ע (Ayin)",
-    "img": "wirth/16.jpg",
-    "mots": [
-      "Éclair",
-      "Rupture",
-      "Révélation",
-      "Éveil brutal"
-    ],
-    "endroit": "Effondrement salutaire d'une construction trop orgueilleuse ; illumination soudaine qui libère l'horizon.",
-    "renverse": "Secousse redoutée, crise contenue ou reconstruction retardée par déni."
-  },
-  {
-    "num": 17,
-    "romain": "XVII",
-    "nom": "Les Étoiles",
-    "lettre": "פ (Phé)",
-    "img": "wirth/17.jpg",
-    "mots": [
-      "Espérance",
-      "Inspiration",
-      "Pureté",
-      "Guidance"
-    ],
-    "endroit": "Sérénité retrouvée sous une lumière bienveillante ; confiance créatrice et don généreux de soi.",
-    "renverse": "Désenchantement passager, doute sur sa bonne étoile ou dispersion rêveuse."
-  },
-  {
-    "num": 18,
-    "romain": "XVIII",
-    "nom": "La Lune",
-    "lettre": "צ (Tsadé)",
-    "img": "wirth/18.jpg",
-    "mots": [
-      "Profondeurs",
-      "Imaginaire",
-      "Reflets",
-      "Mystère"
-    ],
-    "endroit": "Exploration féconde de l'inconscient, des rêves et de la mémoire ; sensibilité accrue aux signes subtils.",
-    "renverse": "Illusions, confusion émotionnelle, craintes nocturnes ou mirages trompeurs."
-  },
-  {
-    "num": 19,
-    "romain": "XIX",
-    "nom": "Le Soleil",
-    "lettre": "ק (Qoph)",
-    "img": "wirth/19.jpg",
-    "mots": [
-      "Clarté",
-      "Joie",
-      "Fraternité",
-      "Rayonnement"
-    ],
-    "endroit": "Lumière pleine et chaleureuse ; réussite partagée, compréhension limpide et vitalité rayonnante.",
-    "renverse": "Éblouissement, chaleur excessive ou joie différée par un léger voile."
-  },
-  {
-    "num": 20,
-    "romain": "XX",
-    "nom": "Le Jugement",
-    "lettre": "ר (Resh)",
-    "img": "wirth/20.jpg",
-    "mots": [
-      "Appel",
-      "Réveil",
-      "Libération",
-      "Renouveau"
-    ],
-    "endroit": "Éveil décisif à une vocation ou à une vérité neuve ; libération soudaine et bilan lumineux.",
-    "renverse": "Surdité à l'appel intérieur, hésitation à franchir le seuil ou nostalgie paralysante."
-  },
-  {
-    "num": 21,
-    "romain": "XXI",
-    "nom": "Le Monde",
-    "lettre": "ת (Tav)",
-    "img": "wirth/21.jpg",
-    "mots": [
-      "Accomplissement",
-      "Plénitude",
-      "Unité",
-      "Couronnement"
-    ],
-    "endroit": "Achèvement harmonieux d'un grand cycle ; accord total entre l'être intérieur et le monde extérieur.",
-    "renverse": "Inachèvement, ultime obstacle avant la couronne ou difficulté à clore un chapitre."
-  }
-];
+      {
+        num: 0,
+        romain: "0",
+        nom: "Le Fou",
+        lettre: "ש (Shin)",
+        img: "wirth/00-le-fou-oswald-wirth-tarot-deck-1889-bnf-4ca673.jpg",
+        mots: [
+          "Élan libre",
+          "Inattendu",
+          "Quête",
+          "Détachement"
+        ],
+        endroit: "Marche vers l'inconnu avec légèreté et foi instinctive. Une ouverture radicale se présente, affranchie des cadres établis.",
+        renverse: "Errance sans boussole, fuite devant les responsabilités ou dispersion des forces par manque d'ancrage."
+      },
+      {
+        num: 1,
+        romain: "I",
+        nom: "Le Bateleur",
+        lettre: "א (Aleph)",
+        img: "wirth/01_Le_Bateleur,_Oswald_Wirth_Tarot_Deck_1889_BnF (1).jpg",
+        mots: [
+          "Initiative",
+          "Habileté",
+          "Potentiel",
+          "Commencement"
+        ],
+        endroit: "Tous les outils sont réunis sur la table : l'idée peut prendre corps par l'adresse, l'audace et la maîtrise naissante.",
+        renverse: "Dispersions, hésitations au seuil de l'action ou ruse employée à contretemps."
+      },
+      {
+        num: 2,
+        romain: "II",
+        nom: "La Papesse",
+        lettre: "ב (Beth)",
+        img: null,
+        mots: [
+          "Savoir intérieur",
+          "Silence",
+          "Intuition",
+          "Gestation"
+        ],
+        endroit: "Recueillement fécond, écoute des lois cachées et maturation silencieuse avant toute révélation.",
+        renverse: "Secret pesant, repli stérile ou refus de voir une vérité déjà inscrite entre les lignes."
+      },
+      {
+        num: 3,
+        romain: "III",
+        nom: "L'Impératrice",
+        lettre: "ג (Guimel)",
+        img: "wirth/03_L'Imperatrice,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Créativité",
+          "Verbe",
+          "Fertilité",
+          "Intelligence"
+        ],
+        endroit: "Épanouissement des idées, rayonnement de l'esprit et capacité à donner forme vivante aux projets.",
+        renverse: "Stérilité créative, vanité intellectuelle ou agitation qui peine à se concrétiser."
+      },
+      {
+        num: 4,
+        romain: "IV",
+        nom: "L'Empereur",
+        lettre: "ד (Daleth)",
+        img: "wirth/04_L'Empereur,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Structure",
+          "Autorité",
+          "Stabilité",
+          "Réalisation"
+        ],
+        endroit: "Assise solide, volonté ordonnatrice et capacité à bâtir dans la durée avec droiture et maîtrise.",
+        renverse: "Rigidité excessive, entêtement autoritaire ou fragilité d'une fondation trop rigide."
+      },
+      {
+        num: 5,
+        romain: "V",
+        nom: "Le Pape",
+        lettre: "ה (Hé)",
+        img: "wirth/05_Le_Pape,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Transmission",
+          "Conseil",
+          "Alliance",
+          "Sagesse"
+        ],
+        endroit: "Lien entre l'idéal et la pratique, enseignement éclairé, médiation juste et fidélité à une parole donnée.",
+        renverse: "Dogmatisme, conseil biaisé ou attachement formaliste à la lettre au détriment de l'esprit."
+      },
+      {
+        num: 6,
+        romain: "VI",
+        nom: "L'Amoureux",
+        lettre: "ו (Vav)",
+        img: "wirth/06_L'Amoureux,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Choix",
+          "Élan du cœur",
+          "Engagement",
+          "Carrefour"
+        ],
+        endroit: "Décision libre et engagée au croisement des voies ; accord profond entre le désir et la conscience.",
+        renverse: "Indécision prolongée, tiraillement intérieur ou choix subi par peur de renoncer."
+      },
+      {
+        num: 7,
+        romain: "VII",
+        nom: "Le Chariot",
+        lettre: "ז (Zaïn)",
+        img: "wirth/07_Le_Chariot,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Conquête",
+          "Direction",
+          "Élan maîtrisé",
+          "Triomphe"
+        ],
+        endroit: "Progression résolue en harmonisant des forces contraires ; avancée victorieuse vers un cap clair.",
+        renverse: "Emballement, perte de maîtrise des rênes ou victoire coûteuse faute de discernement."
+      },
+      {
+        num: 8,
+        romain: "VIII",
+        nom: "La Justice",
+        lettre: "ח (Heth)",
+        img: "wirth/08_La_Justice,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Équilibre",
+          "Rigueur",
+          "Clarté",
+          "Juste mesure"
+        ],
+        endroit: "Pesée lucide des actes et des conséquences ; décision équitable, tranchante et impartiale.",
+        renverse: "Déséquilibre, jugement partial ou sévérité qui oublie l'équité profonde."
+      },
+      {
+        num: 9,
+        romain: "IX",
+        nom: "L'Ermite",
+        lettre: "ט (Teth)",
+        img: "wirth/09_L'Ermite,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Prudence",
+          "Recherche",
+          "Lumière intérieure",
+          "Temps long"
+        ],
+        endroit: "Cheminement patient éclairé par l'expérience ; retrait salutaire pour discerner l'essentiel.",
+        renverse: "Isolement subi, lenteur excessive ou refus de partager sa lampe avec autrui."
+      },
+      {
+        num: 10,
+        romain: "X",
+        nom: "La Roue de Fortune",
+        lettre: "י (Yod)",
+        img: "wirth/10_La_Roue_de_Fortune,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Cycle",
+          "Mouvement",
+          "Opportunité",
+          "Tournant"
+        ],
+        endroit: "Basculement d'un cycle, ouverture soudaine et invitation à saisir l'instant au point d'équilibre.",
+        renverse: "Instabilité répétitive, contretemps ou résistance au changement nécessaire."
+      },
+      {
+        num: 11,
+        romain: "XI",
+        nom: "La Force",
+        lettre: "כ (Kaph)",
+        img: "wirth/11_La_Force,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Maîtrise douce",
+          "Courage",
+          "Endurance",
+          "Sublimation"
+        ],
+        endroit: "Domination calme de l'instinct sans violence ; puissance tranquille qui apprivoise l'obstacle.",
+        renverse: "Impatience, emportement ou doute quant à sa propre capacité de résistance."
+      },
+      {
+        num: 12,
+        romain: "XII",
+        nom: "Le Pendu",
+        lettre: "ל (Lamed)",
+        img: "wirth/12_Le_Pendu,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Renversement",
+          "Lâcher-prise",
+          "Contemplation",
+          "Suspension"
+        ],
+        endroit: "Arrêt fécond qui invite à regarder le monde autrement ; détachement volontaire libérant un nouveau regard.",
+        renverse: "Blocage stérile, attente subie ou sacrifice inutile faute de trancher."
+      },
+      {
+        num: 13,
+        romain: "XIII",
+        nom: "La Mort",
+        lettre: "מ (Mem)",
+        img: "wirth/13_La_Mort,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Mutation",
+          "Élagage",
+          "Fin de cycle",
+          "Renouveau"
+        ],
+        endroit: "Transformation profonde et nécessaire : ce qui a achevé son temps cède la place à une terre neuve.",
+        renverse: "Résistance douloureuse à l'inévitable, attachement au passé ou mue inachevée."
+      },
+      {
+        num: 14,
+        romain: "XIV",
+        nom: "La Tempérance",
+        lettre: "נ (Noun)",
+        img: "wirth/14_La_Temperance,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Alchimie",
+          "Fluidité",
+          "Conciliation",
+          "Guérison"
+        ],
+        endroit: "Circulation harmonieuse entre deux pôles ; apaisement, adaptation souple et régénération.",
+        renverse: "Discordance, excès ou difficulté à trouver le juste dosage entre deux exigences."
+      },
+      {
+        num: 15,
+        romain: "XV",
+        nom: "Le Diable",
+        lettre: "ס (Samekh)",
+        img: "wirth/15_Le_Diable,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Désir",
+          "Magnétisme",
+          "Attachement",
+          "Lucidité"
+        ],
+        endroit: "Énergie vitale brute et lucide sur les passions ; capacité à reconnaître ce qui lie pour s'en affranchir.",
+        renverse: "Emprise, dépendance, fascination aveugle ou jeu de pouvoir destructeur."
+      },
+      {
+        num: 16,
+        romain: "XVI",
+        nom: "Le Feu du Ciel",
+        lettre: "ע (Ayin)",
+        img: "wirth/16_Le_Feu_du_Ciel,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Éclair",
+          "Rupture",
+          "Révélation",
+          "Éveil brutal"
+        ],
+        endroit: "Effondrement salutaire d'une construction trop orgueilleuse ; illumination soudaine qui libère l'horizon.",
+        renverse: "Secousse redoutée, crise contenue ou reconstruction retardée par déni."
+      },
+      {
+        num: 17,
+        romain: "XVII",
+        nom: "Les Étoiles",
+        lettre: "פ (Phé)",
+        img: "wirth/17_Les_Etoiles,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Espérance",
+          "Inspiration",
+          "Pureté",
+          "Guidance"
+        ],
+        endroit: "Sérénité retrouvée sous une lumière bienveillante ; confiance créatrice et don généreux de soi.",
+        renverse: "Désenchantement passager, doute sur sa bonne étoile ou dispersion rêveuse."
+      },
+      {
+        num: 18,
+        romain: "XVIII",
+        nom: "La Lune",
+        lettre: "צ (Tsadé)",
+        img: "wirth/18_La_Lune,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Profondeurs",
+          "Imaginaire",
+          "Reflets",
+          "Mystère"
+        ],
+        endroit: "Exploration féconde de l'inconscient, des rêves et de la mémoire ; sensibilité accrue aux signes subtils.",
+        renverse: "Illusions, confusion émotionnelle, craintes nocturnes ou mirages trompeurs."
+      },
+      {
+        num: 19,
+        romain: "XIX",
+        nom: "Le Soleil",
+        lettre: "ק (Qoph)",
+        img: "wirth/19_Le_Soleil,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Clarté",
+          "Joie",
+          "Fraternité",
+          "Rayonnement"
+        ],
+        endroit: "Lumière pleine et chaleureuse ; réussite partagée, compréhension limpide et vitalité rayonnante.",
+        renverse: "Éblouissement, chaleur excessive ou joie différée par un léger voile."
+      },
+      {
+        num: 20,
+        romain: "XX",
+        nom: "Le Jugement",
+        lettre: "ר (Resh)",
+        img: "wirth/20_Le_Jugement,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Appel",
+          "Réveil",
+          "Libération",
+          "Renouveau"
+        ],
+        endroit: "Éveil décisif à une vocation ou à une vérité neuve ; libération soudaine et bilan lumineux.",
+        renverse: "Surdité à l'appel intérieur, hésitation à franchir le seuil ou nostalgie paralysante."
+      },
+      {
+        num: 21,
+        romain: "XXI",
+        nom: "Le Monde",
+        lettre: "ת (Tav)",
+        img: "wirth/21_Le_Monde,_Oswald_Wirth_Tarot_Deck_1889_BnF.jpg",
+        mots: [
+          "Accomplissement",
+          "Plénitude",
+          "Unité",
+          "Couronnement"
+        ],
+        endroit: "Achèvement harmonieux d'un grand cycle ; accord total entre l'être intérieur et le monde extérieur.",
+        renverse: "Inachèvement, ultime obstacle avant la couronne ou difficulté à clore un chapitre."
+      }
+    ];
 
     const AXES = {
       temps: [
@@ -1098,6 +1098,10 @@
         { titre: "III. La Synthèse", sousTitre: "Voie de résolution" }
       ]
     };
+
+    function urlImage(chemin) {
+      return encodeURI(chemin).replace(/'/g, "%27");
+    }
 
     function deArcane(nom) {
       if (nom.startsWith("Le ")) return "du " + nom.slice(3);
@@ -1130,7 +1134,7 @@
 
     function renderCardGraphic(arcane, renverse) {
       if (arcane.img) {
-        return `<img src="${arcane.img}" alt="${arcane.romain} — ${arcane.nom}" loading="lazy" />`;
+        return `<img src="${urlImage(arcane.img)}" alt="${arcane.romain} — ${arcane.nom}" loading="lazy" />`;
       }
       return `
         <div class="papesse-plate ${renverse ? 'reversed' : ''}">
@@ -1277,7 +1281,7 @@
 
     function ouvrirModal(a) {
       document.getElementById("modalVisual").innerHTML = a.img
-        ? `<img class="modal-img" src="${a.img}" alt="${a.nom}" />`
+        ? `<img class="modal-img" src="${urlImage(a.img)}" alt="${a.nom}" />`
         : `<div style="height:340px">${renderCardGraphic(a, false)}</div>`;
 
       document.getElementById("modalInfo").innerHTML = `
