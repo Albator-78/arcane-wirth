@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#d4af37">
+
+  <title>Croix de Wirth — Tarot symbolique</title>
+
+  <!-- Configuration PWA -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="./icon-192.png"
+  >
+
+  <style>
+    :root {
+      --fond: #0d0b10;
+      --fond-carte: #16131c;
+      --fond-panneau: #1d1825;
+      --or: #d4af37;
+      --or-clair: #ead688;
+      --or-transparent: rgba(212, 175, 55, 0.25);
+      --texte: #efe9dc;
+      --texte-secondaire: #aaa1b5;
+      --rouge: #a93642;
+      --bleu: #397d89;
+      --rayon: 15px;
+      --ombre: 0 14px 35px rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      padding-bottom: 4rem;
+      color: var(--texte);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at top, #251c31 0%, var(--fond) 70%);
+    }
+
+    header {
+      padding: 2.4rem 1rem 1.8rem;
+      text-align: center;
+      border-bottom: 1px solid var(--or-transparent);
+      background:
+        linear-gradient(
+          180deg,
+          rgba(212, 175, 55, 0.08),
+          transparent
+        );
+    }
+
+    h1 {
+      margin-bottom: 0.5rem;
+      color: var(--or-clair);
+      font-size: clamp(1.8rem, 6vw, 2.8rem);
+      font-weight: normal;
+    }
+
+    .sous-titre {
+      max-width: 760px;
+      margin: auto;
+      color: var(--texte-secondaire);
+    }
+
+    .compteur {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.55rem 1rem;
+      color: var(--or-clair);
+      font-family: system-ui, sans-serif;
+      font-size: 0.82rem;
+      border: 1px solid var(--or-transparent);
+      border-radius: 999px;
+      background: var(--fond-panneau);
+    }
+
+    main {
+      width: min(1180px, 100%);
+      margin: auto;
+      padding: 1.4rem;
+    }
+
+    .panneau {
+      margin-bottom: 2rem;
+      padding: 1.3rem;
+      border: 1px solid var(--or-transparent);
+      border-radius: var(--rayon);
+      background: var(--fond-panneau);
+      box-shadow: var(--ombre);
+    }
+
+    .question {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.8rem 1rem;
+      color: var(--texte);
+      font: inherit;
+      border: 1px solid var(--or-transparent);
+      border-radius: 10px;
+      outline: none;
+      background: var(--fond);
+    }
+
+    .question:focus {
+      border-color: var(--or);
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+      align-items: end;
+    }
+
+    .groupe label.titre-option {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--or-clair);
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.7rem;
+      color: var(--texte);
+      border: 1px solid var(--or-transparent);
+      border-radius: 8px;
+      background: var(--fond);
+    }
+
+    .case-option {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      gap: 0.55rem;
+      padding: 0.65rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+      border: 1px solid var(--or-transparent);
+      border-radius: 8px;
+      background: var(--fond);
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .boutons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.2rem;
+    }
+
+    .btn-principal,
+    .btn-secondaire {
+      padding: 0.78rem 1.3rem;
+      border-radius: 10px;
+      font-family: system-ui, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .btn-principal {
+      color: #17121b;
+      font-weight: bold;
+      background: linear-gradient(135deg, #efda83, #b88b20);
+    }
+
+    .btn-secondaire {
+      color: var(--or-clair);
+      border: 1px solid var(--or-transparent);
+      background: transparent;
+    }
+
+    /*
+      Disposition :
+                 juge
+        pour   synthèse   contre
+               sentence
+    */
+
+    .croix {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(190px, 1fr));
+      grid-template-areas:
+        ". juge ."
+        "pour centre contre"
+        ". sentence .";
+      gap: 1.2rem;
+      align-items: start;
+      margin-bottom: 2rem;
+    }
+
+    .position-pour {
+      grid-area: pour;
+    }
+
+    .position-contre {
+      grid-area: contre;
+    }
+
+    .position-juge {
+      grid-area: juge;
+    }
+
+    .position-sentence {
+      grid-area: sentence;
+    }
+
+    .position-centre {
+      grid-area: centre;
+    }
+
+    .emplacement {
+      min-width: 0;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid var(--or-transparent);
+      border-radius: var(--rayon);
+      background: var(--fond-carte);
+      box-shadow: var(--ombre);
+    }
+
+    .position-centre {
+      border-color: var(--or);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(212, 175, 55, 0.15),
+          var(--fond-carte)
+        );
+    }
+
+    .role {
+      color: var(--or);
+      font-family: system-ui, sans-serif;
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .fonction {
+      min-height: 2.6rem;
+      margin-bottom: 0.75rem;
+      color: var(--texte-secondaire);
+      font-size: 0.8rem;
+    }
+
+    .carte {
+      position: relative;
+      width: min(180px, 100%);
+      aspect-ratio: 250 / 422;
+      margin: auto;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .carte-interieure {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      transition: transform 0.65s ease;
+    }
+
+    .carte.retournee .carte-interieure {
+      transform: rotateY(180deg);
+    }
+
+    .face {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border: 2px solid var(--or);
+      border-radius: 10px;
+      backface-visibility: hidden;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.7);
+    }
+
+    .dos {
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      color: var(--or-clair);
+      background:
+        radial-gradient(
+          circle,
+          rgba(212, 175, 55, 0.25),
+          transparent 60%
+        ),
+        repeating-linear-gradient(
+          45deg,
+          #20172a 0,
+          #20172a 10px,
+          #130f19 10px,
+          #130f19 20px
+        );
+    }
+
+    .ornement {
+      display: grid;
+      width: 80%;
+      height: 80%;
+      place-items: center;
+      padding: 1rem;
+      border: 1px solid var(--or-transparent);
+      border-radius: 8px;
+    }
+
+    .ornement strong {
+      font-size: 1.5rem;
+    }
+
+    .devant {
+      display: grid;
+      place-items: center;
+      transform: rotateY(180deg);
+      background: #efe4ce;
+    }
+
+    .devant img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .devant.renversee img {
+      transform: rotate(180deg);
+    }
+
+    .arcane-secours {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      color: #241e18;
+      border: 6px solid #2a231d;
+      background:
+        linear-gradient(180deg, #f3ebdb, #dfcfad);
+    }
+
+    .arcane-secours.renversee {
+      transform: rotate(180deg);
+    }
+
+    .arcane-secours .numero {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .arcane-secours .symbole {
+      color: #98751d;
+      font-size: 3rem;
+    }
+
+    .arcane-secours .nom {
+      padding: 0.35rem;
+      font-weight: bold;
+      border: 1px solid #2a231d;
+      background: #ddbd55;
+    }
+
+    .details {
+      display: none;
+      margin-top: 0.8rem;
+    }
+
+    .details.visible {
+      display: block;
+    }
+
+    .nom-carte {
+      color: var(--or-clair);
+      font-size: 1.05rem;
+    }
+
+    .orientation {
+      display: inline-block;
+      margin: 0.3rem 0 0.6rem;
+      padding: 0.14rem 0.5rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.68rem;
+      border-radius: 999px;
+    }
+
+    .orientation.endroit {
+      color: #9de8ef;
+      background: rgba(42, 111, 120, 0.3);
+    }
+
+    .orientation.renversee {
+      color: #ffc1c1;
+      background: rgba(158, 42, 43, 0.3);
+    }
+
+    .mots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+
+    .mot {
+      padding: 0.15rem 0.4rem;
+      color: var(--texte-secondaire);
+      font-family: system-ui, sans-serif;
+      font-size: 0.68rem;
+      border: 1px solid var(--or-transparent);
+      border-radius: 5px;
+    }
+
+    .calcul {
+      margin-top: 0.7rem;
+      color: var(--or-clair);
+      font-size: 0.78rem;
+    }
+
+    .interpretation {
+      padding: 1.5rem;
+      border: 1px solid var(--or);
+      border-radius: var(--rayon);
+      background:
+        linear-gradient(145deg, #1d1727, #110e16);
+      box-shadow: var(--ombre);
+    }
+
+    .interpretation h2 {
+      margin-bottom: 1rem;
+      color: var(--or-clair);
+      font-size: 1.35rem;
+      font-weight: normal;
+    }
+
+    .interpretation-section {
+      margin-bottom: 1.15rem;
+      padding-bottom: 1.15rem;
+      border-bottom: 1px solid var(--or-transparent);
+    }
+
+    .interpretation-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .interpretation-section h3 {
+      margin-bottom: 0.35rem;
+      color: var(--or);
+      font-size: 1rem;
+    }
+
+    .interpretation-section p {
+      color: var(--texte);
+    }
+
+    .question-rappel {
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      color: var(--texte-secondaire);
+      font-style: italic;
+      border-left: 3px solid var(--or);
+      background: rgba(0, 0, 0, 0.22);
+    }
+
+    @media (max-width: 850px) {
+      .croix {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "juge juge"
+          "pour contre"
+          "centre centre"
+          "sentence sentence";
+      }
+
+      .position-juge,
+      .position-centre,
+      .position-sentence {
+        width: min(360px, 100%);
+        justify-self: center;
+      }
+    }
+
+    @media (max-width: 530px) {
+      main {
+        padding: 0.8rem;
+      }
+
+      .croix {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "juge"
+          "pour"
+          "centre"
+          "contre"
+          "sentence";
+      }
+
+      .emplacement {
+        width: 100%;
+      }
+
+      .carte {
+        width: 175px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>✦ Croix de Wirth ✦</h1>
+
+    <p class="sous-titre">
+      Quatre témoins sont tirés. La cinquième lame, placée au
+      centre, est calculée et révèle le principe dominant du tirage.
+    </p>
+
+    <div class="compteur">
+      175 560 tirages ordonnés · 2 808 960 avec renversements
+    </div>
+  </header>
+
+  <main>
+    <section class="panneau">
+      <input
+        id="question"
+        class="question"
+        type="text"
+        placeholder="Formulez une question ou une proposition précise…"
+      >
+
+      <div class="options">
+        <div class="groupe">
+          <label class="titre-option" for="methodeSynthese">
+            Calcul de la synthèse
+          </label>
+
+          <select id="methodeSynthese">
+            <option value="retrait22">
+              Retranchement de 22
+            </option>
+
+            <option value="theosophique">
+              Réduction théosophique
+            </option>
+          </select>
+        </div>
+
+        <div class="groupe">
+          <label class="titre-option" for="styleLecture">
+            Style d’interprétation
+          </label>
+
+          <select id="styleLecture">
+            <option value="direct">
+              Direct
+            </option>
+
+            <option value="symbolique">
+              Symbolique
+            </option>
+
+            <option value="romantique">
+              Romantique
+            </option>
+          </select>
+        </div>
+
+        <label class="case-option">
+          <input id="autoriserRenversees" type="checkbox" checked>
+          Autoriser les lames renversées
+        </label>
+      </div>
+
+      <div class="boutons">
+        <button
+          id="btnTirer"
+          class="btn-principal"
+          type="button"
+        >
+          Battre et tirer la croix
+        </button>
+
+        <button
+          id="btnReveler"
+          class="btn-secondaire"
+          type="button"
+        >
+          Révéler toutes les lames
+        </button>
+      </div>
+    </section>
+
+    <section id="croix" class="croix"></section>
+
+    <section id="interpretation" class="interpretation">
+      <h2>Interprétation de la croix</h2>
+
+      <p style="color:var(--texte-secondaire)">
+        Effectuez un tirage, puis révélez les cinq lames pour obtenir
+        la lecture complète.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    /*
+      Les noms d’images correspondent à l’arborescence employée
+      dans l’application Arcane Wirth.
+    */
+
+    const ARCANES = [
+      {
+        num: 0,
+        romain: "0",
+        nom: "Le Fou",
+        img: "wirth/00-le-fou-oswald-wirth-tarot-deck-1889-bnf-4ca673.jpg",
+        mots: ["liberté", "élan", "inconnu", "détachement"],
+        endroit: "Avancer librement vers l’inconnu.",
+        renverse: "Éviter la dispersion et l’errance sans direction."
+      },
+      {
+        num: 1,
+        romain: "I",
+        nom: "Le Bateleur",
+        img: "wirth/01-le-bateleur-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["initiative", "potentiel", "habileté", "commencement"],
+        endroit: "Saisir les moyens disponibles et commencer.",
+        renverse: "Rassembler ses forces avant d’agir."
+      },
+      {
+        num: 2,
+        romain: "II",
+        nom: "La Papesse",
+        img: "wirth/02-la-papesse-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["intuition", "silence", "gestation", "savoir"],
+        endroit: "Écouter ce qui mûrit dans le silence.",
+        renverse: "Sortir d’un secret ou d’un repli devenu stérile."
+      },
+      {
+        num: 3,
+        romain: "III",
+        nom: "L’Impératrice",
+        img: "wirth/03-l-imperatrice-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["créativité", "intelligence", "expression", "fertilité"],
+        endroit: "Donner une forme claire et vivante aux idées.",
+        renverse: "Éviter l’agitation intellectuelle sans réalisation."
+      },
+      {
+        num: 4,
+        romain: "IV",
+        nom: "L’Empereur",
+        img: "wirth/04-l-empereur-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["structure", "stabilité", "autorité", "réalisation"],
+        endroit: "Construire sur des bases solides.",
+        renverse: "Assouplir une structure devenue trop rigide."
+      },
+      {
+        num: 5,
+        romain: "V",
+        nom: "Le Pape",
+        img: "wirth/05-le-pape-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["transmission", "conseil", "alliance", "sagesse"],
+        endroit: "Chercher une médiation et transmettre justement.",
+        renverse: "Se libérer d’un conseil dogmatique."
+      },
+      {
+        num: 6,
+        romain: "VI",
+        nom: "L’Amoureux",
+        img: "wirth/06-l-amoureux-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["choix", "désir", "engagement", "carrefour"],
+        endroit: "Choisir en accord avec la conscience.",
+        renverse: "Sortir de l’indécision ou d’un choix subi."
+      },
+      {
+        num: 7,
+        romain: "VII",
+        nom: "Le Chariot",
+        img: "wirth/07-le-chariot-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["avance", "direction", "maîtrise", "conquête"],
+        endroit: "Diriger les forces vers un objectif clair.",
+        renverse: "Reprendre les rênes avant de poursuivre."
+      },
+      {
+        num: 8,
+        romain: "VIII",
+        nom: "La Justice",
+        img: "wirth/08-la-justice-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["équilibre", "rigueur", "mesure", "responsabilité"],
+        endroit: "Décider avec lucidité et équité.",
+        renverse: "Corriger un déséquilibre ou un jugement partial."
+      },
+      {
+        num: 9,
+        romain: "IX",
+        nom: "L’Ermite",
+        img: "wirth/09-l-ermite-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["prudence", "recherche", "patience", "discernement"],
+        endroit: "Avancer lentement à la lumière de l’expérience.",
+        renverse: "Rompre un isolement ou une attente excessive."
+      },
+      {
+        num: 10,
+        romain: "X",
+        nom: "La Roue de Fortune",
+        img: "wirth/10-la-roue-de-fortune-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["cycle", "tournant", "mouvement", "occasion"],
+        endroit: "Saisir le changement au moment opportun.",
+        renverse: "Comprendre un cycle répétitif avant d’avancer."
+      },
+      {
+        num: 11,
+        romain: "XI",
+        nom: "La Force",
+        img: "wirth/11-la-force-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["courage", "maîtrise", "endurance", "puissance"],
+        endroit: "Maîtriser l’instinct sans le réprimer.",
+        renverse: "Éviter l’emportement ou le doute paralysant."
+      },
+      {
+        num: 12,
+        romain: "XII",
+        nom: "Le Pendu",
+        img: "wirth/12-le-pendu-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["suspension", "renversement", "lâcher-prise", "regard"],
+        endroit: "Suspendre l’action pour changer de perspective.",
+        renverse: "Mettre fin à une attente devenue stérile."
+      },
+      {
+        num: 13,
+        romain: "XIII",
+        nom: "La Mort",
+        img: "wirth/13-la-mort-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["transformation", "fin", "élagage", "renouveau"],
+        endroit: "Laisser mourir ce qui a terminé son cycle.",
+        renverse: "Cesser de résister à une transformation nécessaire."
+      },
+      {
+        num: 14,
+        romain: "XIV",
+        nom: "La Tempérance",
+        img: "wirth/14-la-temperance-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["harmonie", "fluidité", "conciliation", "guérison"],
+        endroit: "Rétablir une circulation équilibrée.",
+        renverse: "Réajuster un dosage devenu excessif."
+      },
+      {
+        num: 15,
+        romain: "XV",
+        nom: "Le Diable",
+        img: "wirth/15-le-diable-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["désir", "attachement", "magnétisme", "emprise"],
+        endroit: "Reconnaître la puissance du désir et ses liens.",
+        renverse: "Se libérer d’une dépendance ou d’un jeu de pouvoir."
+      },
+      {
+        num: 16,
+        romain: "XVI",
+        nom: "Le Feu du Ciel",
+        img: "wirth/16-le-feu-du-ciel-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["rupture", "révélation", "chute", "éveil"],
+        endroit: "Accepter la révélation qui détruit une illusion.",
+        renverse: "Ne pas retarder une reconstruction nécessaire."
+      },
+      {
+        num: 17,
+        romain: "XVII",
+        nom: "Les Étoiles",
+        img: "wirth/17-les-etoiles-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["espérance", "inspiration", "confiance", "guidance"],
+        endroit: "Suivre une inspiration simple et généreuse.",
+        renverse: "Retrouver confiance après un désenchantement."
+      },
+      {
+        num: 18,
+        romain: "XVIII",
+        nom: "La Lune",
+        img: "wirth/18-la-lune-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["imaginaire", "intuition", "mystère", "illusion"],
+        endroit: "Explorer les images et les signes de l’inconscient.",
+        renverse: "Dissiper les peurs, les projections et les mirages."
+      },
+      {
+        num: 19,
+        romain: "XIX",
+        nom: "Le Soleil",
+        img: "wirth/19-le-soleil-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["clarté", "joie", "union", "rayonnement"],
+        endroit: "Éclairer la situation et favoriser l’accord.",
+        renverse: "Éviter l’orgueil ou une vision trop éblouie."
+      },
+      {
+        num: 20,
+        romain: "XX",
+        nom: "Le Jugement",
+        img: "wirth/20-le-jugement-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["appel", "réveil", "libération", "bilan"],
+        endroit: "Répondre à l’appel d’une vérité nouvelle.",
+        renverse: "Cesser d’ignorer une décision devenue nécessaire."
+      },
+      {
+        num: 21,
+        romain: "XXI",
+        nom: "Le Monde",
+        img: "wirth/21-le-monde-oswald-wirth-tarot-deck-1889-bnf.jpg",
+        mots: ["accomplissement", "unité", "plénitude", "couronnement"],
+        endroit: "Achever le cycle dans une vision plus vaste.",
+        renverse: "Résoudre le dernier obstacle avant l’achèvement."
+      }
+    ];
+
+    const POSITIONS = [
+      {
+        cle: "pour",
+        classe: "position-pour",
+        titre: "1. Témoin pour",
+        fonction: "Ce qui soutient la proposition"
+      },
+      {
+        cle: "contre",
+        classe: "position-contre",
+        titre: "2. Témoin contre",
+        fonction: "Ce qui résiste ou met en garde"
+      },
+      {
+        cle: "juge",
+        classe: "position-juge",
+        titre: "3. Le juge",
+        fonction: "Arbitrage, conseil et juste attitude"
+      },
+      {
+        cle: "sentence",
+        classe: "position-sentence",
+        titre: "4. La sentence",
+        fonction: "Résolution et issue probable"
+      },
+      {
+        cle: "synthese",
+        classe: "position-centre",
+        titre: "5. La synthèse",
+        fonction: "Principe central calculé"
+      }
+    ];
+
+    const GABARITS = {
+      direct: {
+        ouverture: [
+          "La question est dominée par {synthese}.",
+          "Le principe déterminant de ce tirage est {synthese}.",
+          "La situation repose principalement sur {synthese}."
+        ],
+        conflit: [
+          "La situation est soutenue par {pour}, mais elle se heurte à {contre}.",
+          "Votre principal atout réside dans {pour}. Le principal obstacle concerne {contre}.",
+          "{pour} favorise le projet, tandis que {contre} en limite l’élan."
+        ],
+        arbitrage: [
+          "Le juge recommande {juge}.",
+          "Pour arbitrer cette opposition, il faut privilégier {juge}.",
+          "La décision demande une attitude fondée sur {juge}."
+        ],
+        issue: [
+          "La sentence conduit vers {sentence}.",
+          "L’issue probable met en avant {sentence}.",
+          "Si le conseil est suivi, la résolution passe par {sentence}."
+        ],
+        conclusion: [
+          "En résumé, {synthese} doit orienter la décision.",
+          "Le tirage invite donc à placer {synthese} au centre de votre démarche.",
+          "La réponse dépend finalement de votre capacité à incarner {synthese}."
+        ]
+      },
+
+      symbolique: {
+        ouverture: [
+          "Au centre de la croix, {synthese} tient la clef du mystère.",
+          "La cinquième lame révèle un sceau de {synthese}.",
+          "Toute la figure s’ordonne autour du symbole de {synthese}."
+        ],
+        conflit: [
+          "À gauche se lève {pour}; à droite se dresse l’ombre de {contre}.",
+          "Le témoin favorable porte {pour}, tandis que l’adversaire éprouve la situation par {contre}.",
+          "Deux forces se répondent : la lumière de {pour} et l’épreuve de {contre}."
+        ],
+        arbitrage: [
+          "Au sommet de la croix, le juge révèle la mesure de {juge}.",
+          "Le juge pèse les deux voix et impose la loi de {juge}.",
+          "L’arbitrage ne se trouve ni d’un côté ni de l’autre, mais dans {juge}."
+        ],
+        issue: [
+          "Au pied de la croix, la sentence inscrit {sentence}.",
+          "La parole finale prend la forme de {sentence}.",
+          "La voie descend vers une résolution marquée par {sentence}."
+        ],
+        conclusion: [
+          "Ainsi, la croix se referme sur le principe de {synthese}.",
+          "Le centre rassemble les quatre voix dans une même exigence : {synthese}.",
+          "Le symbole central rappelle que tout dépend de {synthese}."
+        ]
+      },
+
+      romantique: {
+        ouverture: [
+          "Au cœur du tirage, {synthese} donne sa couleur à toute l’histoire.",
+          "La carte centrale murmure que la situation cherche {synthese}.",
+          "Le fil intime de cette question se révèle dans {synthese}."
+        ],
+        conflit: [
+          "Un élan de {pour} porte la situation, mais {contre} trouble encore son chemin.",
+          "Le cœur trouve un appui dans {pour}, tandis qu’il hésite devant {contre}.",
+          "{pour} ouvre une possibilité, mais {contre} demande d’avancer avec délicatesse."
+        ],
+        arbitrage: [
+          "Le juge conseille de laisser {juge} guider les prochains pas.",
+          "La voie la plus juste s’exprime à travers {juge}.",
+          "Entre l’élan et la crainte, {juge} peut rétablir un accord sincère."
+        ],
+        issue: [
+          "La sentence laisse entrevoir {sentence}.",
+          "L’histoire pourrait évoluer vers {sentence}.",
+          "La résolution se dessine doucement autour de {sentence}."
+        ],
+        conclusion: [
+          "La réponse ne se trouve donc pas dans la précipitation, mais dans {synthese}.",
+          "En définitive, {synthese} peut réunir ce qui semblait séparé.",
+          "Le tirage vous invite à faire confiance à {synthese}."
+        ]
+      }
+    };
+
+    let tirageActuel = null;
+
+    function choisir(tableau) {
+      return tableau[Math.floor(Math.random() * tableau.length)];
+    }
+
+    function motsArcane(item) {
+      return item.arcane.mots.slice(0, 2).join(" et ");
+    }
+
+    function pisteArcane(item) {
+      return item.renversee
+        ? item.arcane.renverse
+        : item.arcane.endroit;
+    }
+
+    function remplacer(gabarit, valeurs) {
+      return gabarit.replace(
+        /\{([a-z]+)\}/g,
+        (_, cle) => valeurs[cle] ?? ""
+      );
+    }
+
+    function reductionTheosophique(somme) {
+      if (somme === 22) return 0;
+      if (somme <= 21) return somme;
+
+      let resultat = somme;
+
+      while (resultat > 22) {
+        resultat = String(resultat)
+          .split("")
+          .reduce((total, chiffre) => total + Number(chiffre), 0);
+      }
+
+      return resultat === 22 ? 0 : resultat;
+    }
+
+    function calculerSynthese(cartes, methode) {
+      const somme = cartes.reduce(
+        (total, item) => total + item.arcane.num,
+        0
+      );
+
+      const numero = methode === "theosophique"
+        ? reductionTheosophique(somme)
+        : somme % 22;
+
+      return {
+        arcane: ARCANES.find(arcane => arcane.num === numero),
+        renversee: false,
+        calculee: true,
+        somme,
+        methode
+      };
+    }
+
+    function tirerCroix() {
+      const paquet = [...ARCANES];
+
+      for (let i = paquet.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [paquet[i], paquet[j]] = [paquet[j], paquet[i]];
+      }
+
+      const renversements =
+        document.getElementById("autoriserRenversees").checked;
+
+      const cartes = paquet.slice(0, 4).map(arcane => ({
+        arcane,
+        renversee: renversements && Math.random() < 0.5,
+        calculee: false
+      }));
+
+      const methode =
+        document.getElementById("methodeSynthese").value;
+
+      const synthese = calculerSynthese(cartes, methode);
+
+      tirageActuel = {
+        pour: cartes[0],
+        contre: cartes[1],
+        juge: cartes[2],
+        sentence: cartes[3],
+        synthese
+      };
+
+      afficherCroix();
+      initialiserInterpretation();
+    }
+
+    function visuelArcane(item) {
+      const arcane = item.arcane;
+
+      if (arcane.img) {
+        return `
+          <img
+            src="${encodeURI(arcane.img)}"
+            alt="${arcane.romain} — ${arcane.nom}"
+          >
+        `;
+      }
+
+      return `
+        <div class="arcane-secours ${item.renversee ? "renversee" : ""}">
+          <div class="numero">${arcane.romain}</div>
+          <div class="symbole">✦</div>
+          <div class="nom">${arcane.nom}</div>
+        </div>
+      `;
+    }
+
+    function emplacementHTML(position, item) {
+      const classeOrientation = item.renversee
+        ? "renversee"
+        : "endroit";
+
+      const libelleOrientation = item.calculee
+        ? "Lame calculée"
+        : item.renversee
+          ? "Lame renversée"
+          : "Lame à l’endroit";
+
+      const calcul = item.calculee
+        ? `
+          <div class="calcul">
+            Somme : ${item.somme} · ${
+              item.methode === "theosophique"
+                ? "réduction théosophique"
+                : "retranchement de 22"
+            }
+          </div>
+        `
+        : "";
+
+      return `
+        <article
+          class="emplacement ${position.classe}"
+          data-cle="${position.cle}"
+        >
+          <div class="role">${position.titre}</div>
+          <div class="fonction">${position.fonction}</div>
+
+          <div class="carte" data-carte="${position.cle}">
+            <div class="carte-interieure">
+              <div class="face dos">
+                <div class="ornement">
+                  <strong>✦</strong>
+                  <span>WIRTH</span>
+                  <small>Toucher pour révéler</small>
+                </div>
+              </div>
+
+              <div class="face devant ${item.renversee ? "renversee" : ""}">
+                ${visuelArcane(item)}
+              </div>
+            </div>
+          </div>
+
+          <div class="details" id="details-${position.cle}">
+            <h3 class="nom-carte">
+              ${item.arcane.romain} — ${item.arcane.nom}
+            </h3>
+
+            <span class="orientation ${classeOrientation}">
+              ${libelleOrientation}
+            </span>
+
+            <div class="mots">
+              ${item.arcane.mots
+                .map(mot => `<span class="mot">${mot}</span>`)
+                .join("")}
+            </div>
+
+            ${calcul}
+          </div>
+        </article>
+      `;
+    }
+
+    function afficherCroix() {
+      const zone = document.getElementById("croix");
+
+      zone.innerHTML = POSITIONS.map(position => {
+        return emplacementHTML(
+          position,
+          tirageActuel[position.cle]
+        );
+      }).join("");
+
+      zone.querySelectorAll(".carte").forEach(carte => {
+        carte.addEventListener("click", () => {
+          carte.classList.add("retournee");
+
+          const cle = carte.dataset.carte;
+          document
+            .getElementById(`details-${cle}`)
+            .classList.add("visible");
+
+          verifierRevelation();
+        });
+      });
+    }
+
+    function initialiserInterpretation() {
+      document.getElementById("interpretation").innerHTML = `
+        <h2>Interprétation de la croix</h2>
+
+        <p style="color:var(--texte-secondaire)">
+          Révélez les cinq lames pour obtenir la lecture complète.
+        </p>
+      `;
+    }
+
+    function verifierRevelation() {
+      const cartes = [...document.querySelectorAll(".carte")];
+
+      const toutesRevelees = cartes.every(
+        carte => carte.classList.contains("retournee")
+      );
+
+      if (toutesRevelees) {
+        genererInterpretation();
+      }
+    }
+
+    function genererInterpretation() {
+      if (!tirageActuel) return;
+
+      const style =
+        document.getElementById("styleLecture").value;
+
+      const gabarits = GABARITS[style];
+
+      const valeurs = {
+        pour: motsArcane(tirageActuel.pour),
+        contre: motsArcane(tirageActuel.contre),
+        juge: motsArcane(tirageActuel.juge),
+        sentence: motsArcane(tirageActuel.sentence),
+        synthese: motsArcane(tirageActuel.synthese)
+      };
+
+      const question =
+        document.getElementById("question").value.trim();
+
+      const rappelQuestion = question
+        ? `
+          <div class="question-rappel">
+            Question : « ${echapperHTML(question)} »
+          </div>
+        `
+        : "";
+
+      document.getElementById("interpretation").innerHTML = `
+        <h2>Interprétation de la croix</h2>
+
+        ${rappelQuestion}
+
+        <div class="interpretation-section">
+          <h3>✦ Principe central</h3>
+
+          <p>
+            ${remplacer(choisir(gabarits.ouverture), valeurs)}
+            ${pisteArcane(tirageActuel.synthese)}
+          </p>
+        </div>
+
+        <div class="interpretation-section">
+          <h3>⚖ Témoin pour et témoin contre</h3>
+
+          <p>
+            ${remplacer(choisir(gabarits.conflit), valeurs)}
+          </p>
+
+          <p>
+            <strong>${tirageActuel.pour.arcane.nom} :</strong>
+            ${pisteArcane(tirageActuel.pour)}
+          </p>
+
+          <p>
+            <strong>${tirageActuel.contre.arcane.nom} :</strong>
+            ${pisteArcane(tirageActuel.contre)}
+          </p>
+        </div>
+
+        <div class="interpretation-section">
+          <h3>⚜ Arbitrage du juge</h3>
+
+          <p>
+            ${remplacer(choisir(gabarits.arbitrage), valeurs)}
+            ${pisteArcane(tirageActuel.juge)}
+          </p>
+        </div>
+
+        <div class="interpretation-section">
+          <h3>📜 Sentence et résolution</h3>
+
+          <p>
+            ${remplacer(choisir(gabarits.issue), valeurs)}
+            ${pisteArcane(tirageActuel.sentence)}
+          </p>
+        </div>
+
+        <div class="interpretation-section">
+          <h3>☉ Conclusion</h3>
+
+          <p>
+            ${remplacer(choisir(gabarits.conclusion), valeurs)}
+          </p>
+        </div>
+      `;
+    }
+
+    function echapperHTML(texte) {
+      return texte
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function revelerToutesLesCartes() {
+      if (!tirageActuel) {
+        tirerCroix();
+      }
+
+      document.querySelectorAll(".carte").forEach(carte => {
+        carte.classList.add("retournee");
+      });
+
+      document.querySelectorAll(".details").forEach(details => {
+        details.classList.add("visible");
+      });
+
+      genererInterpretation();
+    }
+
+    document
+      .getElementById("btnTirer")
+      .addEventListener("click", tirerCroix);
+
+    document
+      .getElementById("btnReveler")
+      .addEventListener("click", revelerToutesLesCartes);
+
+    document
+      .getElementById("styleLecture")
+      .addEventListener("change", () => {
+        if (
+          tirageActuel &&
+          [...document.querySelectorAll(".carte")].every(
+            carte => carte.classList.contains("retournee")
+          )
+        ) {
+          genererInterpretation();
+        }
+      });
+
+    document
+      .getElementById("methodeSynthese")
+      .addEventListener("change", () => {
+        if (tirageActuel) {
+          tirerCroix();
+        }
+      });
+
+    /*
+      Enregistrement du service worker.
+      sw.js doit se trouver dans le même dossier que ce fichier.
+    */
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("./sw.js")
+          .then(registration => {
+            console.log(
+              "Service Worker actif :",
+              registration.scope
+            );
+          })
+          .catch(error => {
+            console.error(
+              "Erreur Service Worker :",
+              error
+            );
+          });
+      });
+    }
+
+    /*
+      Premier tirage lors de l’ouverture.
+    */
+
+    tirerCroix();
+  </script>
+</body>
+</html>
